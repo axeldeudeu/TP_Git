@@ -18,8 +18,9 @@ test_X = test[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
 test_y = test.Species
 
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 
-model = KNeighborsClassifier(n_neighbors=5)
+model = DecisionTreeClassifier(random_state=42)
 prediction = train_model(train_X, train_y, test_X, model)
 
 plt.figure(figsize=(12, 6))
