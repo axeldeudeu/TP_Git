@@ -17,7 +17,7 @@ test_y = test.Species
 
 from sklearn.neighbors import KNeighborsClassifier
 
-model = svm.SVC(kernel='rbf', C=1.0, gamma='scale')
+model = svm.SVC(kernel='rbf', C=0.75, gamma='scale')
 prediction = train_model(train_X, train_y, test_X, model)
 
 plt.figure(figsize=(12, 6))
