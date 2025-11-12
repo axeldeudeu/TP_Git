@@ -17,9 +17,7 @@ train_y = train.Species
 test_X = test[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
 test_y = test.Species
 
-from sklearn.neighbors import KNeighborsClassifier
-
-model = KNeighborsClassifier(n_neighbors=5)
+model = svm.SVC()
 prediction = train_model(train_X, train_y, test_X, model)
 
 plt.figure(figsize=(12, 6))

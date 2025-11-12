@@ -4,5 +4,3 @@ def train_model(train_X, train_y, test_X, model):
     model.fit(train_X,train_y) 
     prediction=model.predict(test_X)
     return prediction
-
-
