@@ -1,0 +1,17 @@
+```
+
+**Contenu du fichier :**
+```
+MODIFICATIONS APPORTÉES PAR ETUDIANT A
+======================================
+
+Fichier modifié : train_model.py
+
+Changements :
+1. Ajout d'une documentation détaillée de la fonction
+2. Ajout de validation des paramètres d'entrée
+3. Gestion d'erreur si les données sont None
+4. Amélioration de la lisibilité du code
+
+Date : 11 Novembre 2025
+Auteur : Etudiant A
