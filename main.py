@@ -1,13 +1,11 @@
 import pandas as pd 
-from sklearn import svm
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from train_model import train_model
 from preprocess_data import preprocess_data
 
 iris = pd.read_csv("InputData/Iris.csv")
-
-test_size = 0.3  # 70% train, 30% test
+test_size = 0.3
 
 train, test = preprocess_data(iris, test_size)
 
@@ -18,9 +16,8 @@ test_X = test[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
 test_y = test.Species
 
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
 
-model = DecisionTreeClassifier(random_state=42)
+model = KNeighborsClassifier(n_neighbors=3)
 prediction = train_model(train_X, train_y, test_X, model)
 
 plt.figure(figsize=(12, 6))
