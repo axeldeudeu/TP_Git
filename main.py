@@ -1,24 +1,48 @@
 import pandas as pd 
-from sklearn import svm  
+from sklearn import svm
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
 from train_model import train_model
 from preprocess_data import preprocess_data
 
-iris = pd.read_csv("InputData/Iris.csv") #load the dataset
-test_size = 0.3 # the attribute test_size=0.3 to use for splitting the data 
-				#into 70% for train and 30% for test
+# Charger le dataset
+iris = pd.read_csv("InputData/Iris.csv")
 
-train, test =preprocess_data(iris, test_size)
-# training data features
-train_X = train[['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']]
-# target of our training data
-train_y=train.Species
-# test data features
-test_X= test[['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']]
-#target value of test data
-test_y =test.Species   
+# Définir la taille du test set
+test_size = 0.3  # 70% train, 30% test
 
+# Prétraiter les données
+train, test = preprocess_data(iris, test_size)
 
+# Features d'entraînement
+train_X = train[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
+# Target d'entraînement
+train_y = train.Species
+
+# Features de test
+test_X = test[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
+# Target de test
+test_y = test.Species
+
+# Créer et entraîner le modèle
 model = svm.SVC()
 prediction = train_model(train_X, train_y, test_X, model)
 
+# a. Afficher les courbes d'entraînement (prédictions vs valeurs réelles)
+plt.figure(figsize=(12, 6))
+plt.plot(range(len(prediction)), prediction, label='Predicted Species', marker='o', linestyle='-', alpha=0.7)
+plt.plot(range(len(test_y)), test_y.values, label='Actual Species', marker='x', linestyle='--', alpha=0.7)
+plt.xlabel('Index des échantillons de test')
+plt.ylabel('Espèces')
+plt.title('Comparaison des prédictions vs valeurs réelles')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('training_curves.png')
+plt.show()
 
+# b. Afficher la métrique statistique : accuracy
+accuracy = accuracy_score(test_y, prediction)
+print(f"\n{'='*50}")
+print(f"Accuracy du modèle: {accuracy:.4f} ({accuracy*100:.2f}%)")
+print(f"{'='*50}\n")
